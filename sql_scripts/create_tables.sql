@@ -1,9 +1,9 @@
 
 CREATE TABLE card (
-    card_id     NUMBER(6) NOT NULL,
-    question    VARCHAR2(200 CHAR) NOT NULL,
-    answer      VARCHAR2(500 CHAR) NOT NULL,
-    category_id NUMBER(5) NOT NULL
+    card_id     NUMERIC(6) NOT NULL,
+    question    VARCHAR(200) NOT NULL,
+    answer      VARCHAR(500) NOT NULL,
+    category_id NUMERIC(5) NOT NULL
 );
 
 CREATE INDEX category__idx ON
@@ -15,9 +15,9 @@ ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
     timestamp        DATE NOT NULL,
-    card_id          NUMBER(6) NOT NULL,
-    return_time      NUMBER(4) NOT NULL,
-    user_id          NUMBER(4) NOT NULL,
+    card_id          NUMERIC(6) NOT NULL,
+    return_time      NUMERIC(4) NOT NULL,
+    user_id          NUMERIC(4) NOT NULL,
     user_category_id DATE NOT NULL,
     is_correct       CHAR(1) NOT NULL
 );
@@ -35,11 +35,11 @@ ALTER TABLE card_answer
                                                 timestamp );
 
 CREATE TABLE category (
-    category_id       NUMBER(5) NOT NULL,
-    name              VARCHAR2(50) NOT NULL,
+    category_id       NUMERIC(5) NOT NULL,
+    name              VARCHAR(50) NOT NULL,
     creation_date     DATE NOT NULL,
-    creator_id        NUMBER(4) NOT NULL,
-    upper_category_id NUMBER(5)
+    creator_id        NUMERIC(4) NOT NULL,
+    upper_category_id NUMERIC(5)
 );
 
 CREATE INDEX upper_category__idx ON
@@ -55,9 +55,9 @@ CREATE INDEX user__idx ON
 ALTER TABLE category ADD CONSTRAINT category_pk PRIMARY KEY ( category_id );
 
 CREATE TABLE multimedia_attach (
-    attach_id  NUMBER(5) NOT NULL,
-    attachment BLOB NOT NULL,
-    card_id    NUMBER(6) NOT NULL
+    attach_id  NUMERIC(5) NOT NULL,
+    attachment BYTEA NOT NULL,
+    card_id    NUMERIC(6) NOT NULL
 );
 
 CREATE INDEX card__idx ON
@@ -68,9 +68,9 @@ CREATE INDEX card__idx ON
 ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach_id );
 
 CREATE TABLE "User" (
-    user_id       NUMBER(4) NOT NULL,
-    login         VARCHAR2(30) NOT NULL,
-    password_hash VARCHAR2(300) NOT NULL,
+    user_id       NUMERIC(4) NOT NULL,
+    login         VARCHAR(30) NOT NULL,
+    password_hash VARCHAR(300) NOT NULL,
     creation_date DATE NOT NULL
 );
 
@@ -80,8 +80,8 @@ ALTER TABLE "User" ADD CONSTRAINT login__un UNIQUE ( login );
 
 CREATE TABLE user_attempt (
     return_time      DATE NOT NULL,
-    user_id          NUMBER(4) NOT NULL,
-    user_category_id NUMBER(5) NOT NULL
+    user_id          NUMERIC(4) NOT NULL,
+    user_category_id NUMERIC(5) NOT NULL
 );
 
 ALTER TABLE user_attempt
@@ -90,8 +90,8 @@ ALTER TABLE user_attempt
                                                  return_time );
 
 CREATE TABLE user_category (
-    category_id NUMBER(5) NOT NULL,
-    user_id     NUMBER(4) NOT NULL
+    category_id NUMERIC(5) NOT NULL,
+    user_id     NUMERIC(4) NOT NULL
 );
 
 CREATE INDEX user_category__id ON
