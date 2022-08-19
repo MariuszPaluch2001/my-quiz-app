@@ -71,13 +71,21 @@ CREATE OR REPLACE TRIGGER fkntm_user_category BEFORE
 /*------------------------------------------------------------------------------------------*/
 CREATE SEQUENCE card_sequence START WITH 1;
 
+CREATE FUNCTION card_trigger_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.card_id := card_sequence.nextval;
+END;
+$$;
+
 CREATE OR REPLACE TRIGGER card_trigger BEFORE
     INSERT ON card
     FOR EACH ROW
     WHEN ( new.card_id IS NULL )
-BEGIN
-    :new.card_id := card_sequence.nextval;
-END;
+    EXECUTE PROCEDURE card_trigger_function();
 
 /*------------------------------------------------------------------------------------------*/
 
