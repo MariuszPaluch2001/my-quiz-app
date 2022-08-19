@@ -67,16 +67,16 @@ CREATE INDEX card__idx ON
 
 ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach_id );
 
-CREATE TABLE "User" (
+CREATE TABLE app_user (
     user_id       NUMERIC(4) NOT NULL,
     login         VARCHAR(30) NOT NULL,
     password_hash VARCHAR(300) NOT NULL,
     creation_date DATE NOT NULL
 );
 
-ALTER TABLE "User" ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
+ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
 
-ALTER TABLE "User" ADD CONSTRAINT login__un UNIQUE ( login );
+ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
 
 CREATE TABLE user_attempt (
     return_time      DATE NOT NULL,
@@ -120,7 +120,7 @@ ALTER TABLE card
 
 ALTER TABLE category
     ADD CONSTRAINT category_user_fk FOREIGN KEY ( creator_id )
-        REFERENCES "User" ( user_id );
+        REFERENCES app_user ( user_id );
 
 ALTER TABLE multimedia_attach
     ADD CONSTRAINT mult_attach_card_fk FOREIGN KEY ( card_id )
@@ -142,5 +142,5 @@ ALTER TABLE user_category
 
 ALTER TABLE user_category
     ADD CONSTRAINT user_category_user_fk FOREIGN KEY ( user_id )
-        REFERENCES "User" ( user_id );
+        REFERENCES app_user ( user_id );
 
