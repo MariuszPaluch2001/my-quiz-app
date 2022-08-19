@@ -69,7 +69,7 @@ CREATE OR REPLACE TRIGGER fkntm_user_category BEFORE
     
   
 /*------------------------------------------------------------------------------------------*/
-CREATE SEQUENCE card_sequence START WITH 1 NOCACHE ORDER;
+CREATE SEQUENCE card_sequence START WITH 1;
 
 CREATE OR REPLACE TRIGGER card_trigger BEFORE
     INSERT ON card
@@ -78,10 +78,11 @@ CREATE OR REPLACE TRIGGER card_trigger BEFORE
 BEGIN
     :new.card_id := card_sequence.nextval;
 END;
-/
 
-CREATE SEQUENCE category_sequence START WITH 1 NOCACHE ORDER;
-t
+/*------------------------------------------------------------------------------------------*/
+
+CREATE SEQUENCE category_sequence START WITH 1;
+
 CREATE OR REPLACE TRIGGER category_trigger BEFORE
     INSERT ON category
     FOR EACH ROW
@@ -89,9 +90,10 @@ CREATE OR REPLACE TRIGGER category_trigger BEFORE
 BEGIN
     :new.category_id := category_sequence.nextval;
 END;
-/
 
-CREATE SEQUENCE attach_sequence START WITH 1 NOCACHE ORDER;
+/*------------------------------------------------------------------------------------------*/
+
+CREATE SEQUENCE attach_sequence START WITH 1;
 
 CREATE OR REPLACE TRIGGER attach_trigger BEFORE
     INSERT ON multimedia_attach
@@ -100,9 +102,10 @@ CREATE OR REPLACE TRIGGER attach_trigger BEFORE
 BEGIN
     :new.attach_id := attach_sequence.nextval;
 END;
-/
 
-CREATE SEQUENCE user_sequence START WITH 1 NOCACHE ORDER;
+/*------------------------------------------------------------------------------------------*/
+
+CREATE SEQUENCE user_sequence START WITH 1;
 
 CREATE OR REPLACE TRIGGER user_trigger BEFORE
     INSERT ON "User"
@@ -111,4 +114,4 @@ CREATE OR REPLACE TRIGGER user_trigger BEFORE
 BEGIN
     :new.user_id := user_sequence.nextval;
 END;
-/
+
