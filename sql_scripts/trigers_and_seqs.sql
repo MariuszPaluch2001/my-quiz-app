@@ -91,13 +91,21 @@ CREATE OR REPLACE TRIGGER card_trigger BEFORE
 
 CREATE SEQUENCE category_sequence START WITH 1;
 
+CREATE FUNCTION category_trigger_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.category_id := category_sequence.nextval;
+END;
+$$;
+
 CREATE OR REPLACE TRIGGER category_trigger BEFORE
     INSERT ON category
     FOR EACH ROW
     WHEN ( new.category_id IS NULL )
-BEGIN
-    :new.category_id := category_sequence.nextval;
-END;
+    EXECUTE PROCEDURE category_trigger_function();
 
 /*------------------------------------------------------------------------------------------*/
 
