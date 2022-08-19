@@ -111,23 +111,39 @@ CREATE OR REPLACE TRIGGER category_trigger BEFORE
 
 CREATE SEQUENCE attach_sequence START WITH 1;
 
+CREATE FUNCTION attach_trigger_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.attach_id := attach_sequence.nextval;
+END;
+$$;
+
 CREATE OR REPLACE TRIGGER attach_trigger BEFORE
     INSERT ON multimedia_attach
     FOR EACH ROW
     WHEN ( new.attach_id IS NULL )
-BEGIN
-    :new.attach_id := attach_sequence.nextval;
-END;
+    EXECUTE PROCEDURE attach_trigger_function();
 
 /*------------------------------------------------------------------------------------------*/
 
 CREATE SEQUENCE user_sequence START WITH 1;
 
+CREATE FUNCTION user_trigger_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.user_id := user_sequence.nextval;
+END;
+$$;
+
 CREATE OR REPLACE TRIGGER user_trigger BEFORE
     INSERT ON "User"
     FOR EACH ROW
     WHEN ( new.user_id IS NULL )
-BEGIN
-    :new.user_id := user_sequence.nextval;
-END;
+    EXECUTE PROCEDURE user_trigger_function();
 
