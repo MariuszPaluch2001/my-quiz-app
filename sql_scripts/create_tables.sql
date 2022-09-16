@@ -14,7 +14,7 @@ CREATE INDEX category__idx ON
 ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
-    timestamp        DATE NOT NULL,
+    timestamp        TIMESTAMP NOT NULL,
     card_id          NUMERIC(6) NOT NULL,
     return_time      NUMERIC(4) NOT NULL,
     user_id          NUMERIC(4) NOT NULL,
@@ -79,7 +79,7 @@ ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
 ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
 
 CREATE TABLE user_attempt (
-    return_time      DATE NOT NULL,
+    return_time      TIMESTAMP NOT NULL,
     user_id          NUMERIC(4) NOT NULL,
     user_category_id NUMERIC(5) NOT NULL
 );

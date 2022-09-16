@@ -162,3 +162,38 @@ INSERT INTO CARD (question, answer, category_id) VALUES(
     'Nie',
     5
 );
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    1,
+    1
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    2,
+    1
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    5,
+    1
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    1,
+    2
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    2,
+    2
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    5,
+    4
+);
+
+INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
+    2,
+    4
+);
