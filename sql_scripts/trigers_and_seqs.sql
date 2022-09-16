@@ -137,12 +137,13 @@ CREATE FUNCTION user_trigger_function()
 AS 
 $$
 BEGIN
-    new.user_id := user_sequence.nextval;
+    new.user_id := nextval('user_sequence');
+    RETURN NEW;
 END;
 $$;
 
 CREATE OR REPLACE TRIGGER user_trigger BEFORE
-    INSERT ON "User"
+    INSERT ON app_user
     FOR EACH ROW
     WHEN ( new.user_id IS NULL )
     EXECUTE PROCEDURE user_trigger_function();
