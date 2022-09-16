@@ -14,12 +14,12 @@ CREATE INDEX category__idx ON
 ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
-    timestamp        TIMESTAMP NOT NULL,
-    card_id          NUMERIC(6) NOT NULL,
-    return_time      NUMERIC(4) NOT NULL,
-    user_id          NUMERIC(4) NOT NULL,
-    user_category_id DATE NOT NULL,
-    is_correct       CHAR(1) NOT NULL
+    solution_timestamp        TIMESTAMP NOT NULL,
+    card_id                   NUMERIC(6) NOT NULL,
+    return_time               TIMESTAMP NOT NULL,
+    user_id                   NUMERIC(4) NOT NULL,
+    user_category_id          NUMERIC(5) NOT NULL,
+    is_correct                CHAR(1) NOT NULL
 );
 
 CREATE INDEX card_answer__idx ON
@@ -32,7 +32,7 @@ ALTER TABLE card_answer
                                                 user_id,
                                                 user_category_id,
                                                 card_id,
-                                                timestamp );
+                                                solution_timestamp );
 
 CREATE TABLE category (
     category_id       NUMERIC(5) NOT NULL,
@@ -110,9 +110,9 @@ ALTER TABLE card_answer
     ADD CONSTRAINT card_answer_user_attempt_fk FOREIGN KEY ( return_time,
                                                              user_id,
                                                              user_category_id )
-        REFERENCES user_attempt ( user_id,
-                                  user_category_id,
-                                  return_time );
+        REFERENCES user_attempt ( return_time,
+                                  user_id,
+                                  user_category_id);
 
 ALTER TABLE card
     ADD CONSTRAINT card_category_fk FOREIGN KEY ( category_id )

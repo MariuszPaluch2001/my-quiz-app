@@ -204,10 +204,83 @@ INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
     1
 );
 
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-04-05 03:01:36',
+    1,
+    '2022-04-05 03:05:06',
+    1,
+    1,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-04-05 03:02:06',
+    2,
+    '2022-04-05 03:05:06',
+    1,
+    1,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-04-05 03:02:36',
+    3,
+    '2022-04-05 03:05:06',
+    1,
+    1,
+    'F'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-04-05 03:03:06',
+    4,
+    '2022-04-05 03:05:06',
+    1,
+    1,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-04-05 03:04:36',
+    5,
+    '2022-04-05 03:05:06',
+    1,
+    1,
+    'F'
+);
+
+
 INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
     '2022-05-01 12:00:56',
     1,
     1
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-05-01 11:50:56',
+    1,
+    '2022-05-01 12:00:56',
+    1,
+    1,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-05-01 11:55:56',
+    2,
+    '2022-05-01 12:00:56',
+    1,
+    1,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-05-01 12:00:50',
+    5,
+    '2022-05-01 12:00:56',
+    1,
+    1,
+    'F'
 );
 
 INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
@@ -300,10 +373,56 @@ INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
     5
 );
 
+
 INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
     '2022-08-18 21:30:15',
     4,
     5
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-08-18 21:26:15',
+    11,
+    '2022-08-18 21:30:15',
+    4,
+    5,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-08-18 21:27:15',
+    12,
+    '2022-08-18 21:30:15',
+    4,
+    5,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-08-18 21:28:15',
+    13,
+    '2022-08-18 21:30:15',
+    4,
+    5,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-08-18 21:29:15',
+    14,
+    '2022-08-18 21:30:15',
+    4,
+    5,
+    'T'
+);
+
+INSERT INTO CARD_ANSWER (solution_timestamp, card_id, return_time, user_id, user_category_id, is_correct) VALUES(
+    '2022-08-18 21:30:15',
+    15,
+    '2022-08-18 21:30:15',
+    4,
+    5,
+    'T'
 );
 
 INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
@@ -311,3 +430,4 @@ INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
     4,
     2
 );
+
