@@ -97,7 +97,8 @@ CREATE FUNCTION category_trigger_function()
 AS 
 $$
 BEGIN
-    new.category_id := category_sequence.nextval;
+    new.category_id := nextval('category_sequence');
+    RETURN NEW;
 END;
 $$;
 
