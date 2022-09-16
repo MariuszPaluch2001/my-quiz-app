@@ -77,7 +77,8 @@ CREATE FUNCTION card_trigger_function()
 AS 
 $$
 BEGIN
-    new.card_id := card_sequence.nextval;
+    new.card_id := nextval('card_sequence');
+    RETURN NEW;
 END;
 $$;
 

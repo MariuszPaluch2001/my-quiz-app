@@ -46,10 +46,70 @@ INSERT INTO CATEGORY (name, creation_date, creator_id) VALUES(
     1
 );
 
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'kanapka',
+    'sandwich',
+    1
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'książka',
+    'book',
+    1
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'stół',
+    'table',
+    1
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'zeszyt',
+    'notebook',
+    1
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'plecak',
+    'bag',
+    1
+);
+
 INSERT INTO CATEGORY (name, creation_date, creator_id) VALUES(
     'Niemiecki - słowa',
     '2022-09-16',
     1
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'woda',
+    'wasser',
+    2
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'książka',
+    'buchen',
+    2
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'stół',
+    'tisch',
+    2
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'czerwony',
+    'rot',
+    2
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'mysz',
+    'maus',
+    2
 );
 
 INSERT INTO CATEGORY (name, creation_date, creator_id) VALUES(
@@ -71,4 +131,34 @@ INSERT INTO CATEGORY (name, creation_date, creator_id, upper_category_ID) VALUES
     '2022-06-16',
     3,
     4
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'Stolica województwa świętokrzyskiego?',
+    'Kielce',
+    5
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'Najdłuższa rzeka w Polsce?',
+    'Wisła',
+    5
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'Najwyższy szczyt w Polsce?',
+    'Rysy',
+    5
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'Graniczna rzeka z Niemcami?',
+    'Odra',
+    5
+);
+
+INSERT INTO CARD (question, answer, category_id) VALUES(
+    'Czy Sandomierz leży nad Sanem?',
+    'Nie',
+    5
 );
