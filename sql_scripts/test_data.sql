@@ -197,3 +197,117 @@ INSERT INTO USER_CATEGORY (category_id, user_id) VALUES(
     2,
     4
 );
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-04-05 03:05:06',
+    1,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-05-01 12:00:56',
+    1,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-05-25 13:05:01',
+    1,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-06-01 23:05:59',
+    1,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-04-05 13:10:15',
+    2,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-04-03 12:00:56',
+    2,
+    1
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2020-02-03 17:00:01',
+    1,
+    5
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2021-04-03 20:00:56',
+    1,
+    5
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-01-01 08:00:56',
+    1,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-02-24 5:00:56',
+    1,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-05-06 15:00:56',
+    1,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-12-03 10:00:56',
+    1,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-04-02 09:00:56',
+    1,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2021-11-02 12:00:56',
+    2,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2021-12-30 14:10:46',
+    2,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-01-10 18:55:56',
+    2,
+    2
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-06-18 20:35:36',
+    4,
+    5
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-08-18 21:30:15',
+    4,
+    5
+);
+
+INSERT INTO USER_ATTEMPT (return_time, user_id, user_category_id) VALUES(
+    '2022-09-16 17:47:10',
+    4,
+    2
+);
