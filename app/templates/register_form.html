@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
   {% block content %}
-    <p>Register page</p>
+  <form style=" padding-top: 10%">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputLogin">Login</label>
+        <input type="email" class="form-control" id="exampleInputLogin"  placeholder="Login">
+      </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="btn-group-horizontal gap-5" style=" padding-top: 3%">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
   {% endblock %}
