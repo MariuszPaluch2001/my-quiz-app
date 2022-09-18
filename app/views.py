@@ -11,8 +11,8 @@ def render_about(request):
 def render_quiz_menu(request):
     return render(request, "quiz_menu.html")
 
-def render_add_quiz(request):
-    return render(request, "add_quiz.html")
+def render_add_category(request):
+    return render(request, "add_category.html")
 
 def render_add_question(request):
     return render(request, "add_question.html")
