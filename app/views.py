@@ -16,3 +16,9 @@ def render_add_category(request):
 
 def render_add_question(request):
     return render(request, "add_question.html")
+
+def render_register(request):
+    return render(request, "register_form.html")
+
+def render_login(request):
+    return render(request, "login_form.html")
