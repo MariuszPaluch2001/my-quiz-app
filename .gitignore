@@ -5,4 +5,3 @@ data_modeler/
 
 *.pyc
 db.sqlite3
-staticfiles/
