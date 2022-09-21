@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 data_modeler/
 *.dmd
+
+*.pyc
+db.sqlite3
+staticfiles/
