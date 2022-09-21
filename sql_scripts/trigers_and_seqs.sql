@@ -150,3 +150,19 @@ CREATE OR REPLACE TRIGGER user_trigger BEFORE
     WHEN ( new.user_id IS NULL )
     EXECUTE PROCEDURE user_trigger_function();
 
+CREATE FUNCTION user_trigger_datenow_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.creation_date := NOW()::timestamp::date;
+    RETURN NEW;
+END;
+$$;
+
+
+CREATE OR REPLACE TRIGGER user_datenow_trigger BEFORE
+    INSERT ON app_user
+    FOR EACH ROW
+    EXECUTE PROCEDURE user_trigger_datenow_function();
