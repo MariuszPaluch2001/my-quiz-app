@@ -6,12 +6,14 @@ class RegisterForm(ModelForm):
     #Temporary form for test. In future password hash will be realy password hash. :)
     class Meta:
         model = AppUser
-        fields = ['login', 'password_hash']
+        fields = ['email','login', 'password_hash']
         labels = {
+            'email' : '',
             'login' : '',
             'password_hash' : ''
         }
         widgets = {
+            'email' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'email'}),
             'login' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'login'}),
             'password_hash' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'password'})
 

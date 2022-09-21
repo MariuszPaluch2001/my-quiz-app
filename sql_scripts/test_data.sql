@@ -1,40 +1,47 @@
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto1@gmail.com',
     'Maly Gucio',
     'hash1234',
     '2022-06-01'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto2@gmail.com',
     'Mały Kaziu',
     '1234hash',
     '2021-06-01'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto3@gmail.com',
     'Salto Morales',
     'SuperRealnyHashNoScam',
     '2020-06-01'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto4@gmail.com',
     'Siara',
     'SiarzewskiHash',
     '2019-08-19'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto5@gmail.com',
     'AC/DC_FAN',
     'PLACEHOLDER',
     '2020-06-01'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto6@gmail.com',
     'Jerzy Kiler',
     'placeholdernahash',
     '2020-06-01'
 );
 
-INSERT INTO APP_USER (login, password_hash, creation_date) VALUES (
+INSERT INTO APP_USER (email, login, password_hash, creation_date) VALUES (
+    'acocieto7@gmail.com',
     'Jan_Paweł_III',
     'MożnaJeszczeJak',
     '2020-06-01'

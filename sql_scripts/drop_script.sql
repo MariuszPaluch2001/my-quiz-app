@@ -2,6 +2,9 @@ DROP TRIGGER user_trigger ON app_user;
 DROP FUNCTION user_trigger_function;
 DROP SEQUENCE user_sequence;
 
+DROP TRIGGER user_datenow_trigger ON app_user;
+DROP FUNCTION user_trigger_datenow_function;
+
 DROP TRIGGER attach_trigger ON multimedia_attach;
 DROP FUNCTION attach_trigger_function;
 DROP SEQUENCE attach_sequence;
@@ -9,6 +12,9 @@ DROP SEQUENCE attach_sequence;
 DROP TRIGGER category_trigger ON category;
 DROP FUNCTION category_trigger_function;
 DROP SEQUENCE category_sequence;
+
+DROP TRIGGER category_datenow_trigger ON category;
+DROP FUNCTION category_datenow_trigger_function;
 
 DROP TRIGGER card_trigger ON card;
 DROP FUNCTION card_trigger_function;
