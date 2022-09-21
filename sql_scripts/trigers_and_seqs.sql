@@ -109,6 +109,22 @@ CREATE OR REPLACE TRIGGER category_trigger BEFORE
     WHEN ( new.category_id IS NULL )
     EXECUTE PROCEDURE category_trigger_function();
 
+CREATE FUNCTION category_datenow_trigger_function()  
+   RETURNS trigger
+   LANGUAGE PLPGSQL
+AS 
+$$
+BEGIN
+    new.creation_date := NOW()::timestamp::date;
+    RETURN NEW;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER category_datenow_trigger BEFORE
+    INSERT ON category
+    FOR EACH ROW
+    EXECUTE PROCEDURE category_datenow_trigger_function();
+
 /*------------------------------------------------------------------------------------------*/
 
 CREATE SEQUENCE attach_sequence START WITH 1;

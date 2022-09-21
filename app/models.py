@@ -117,6 +117,9 @@ class Category(models.Model):
         managed = False
         db_table = 'category'
 
+    def __str__(self):
+        return self.name
+
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
