@@ -40,6 +40,3 @@ def render_register(request):
         if 'submitted' in request.GET:
             submitted = True
     return render(request, "register_form.html", {'form' : form, 'submitted' : submitted})
-
-def render_login(request):
-    return render(request, "login_form.html")

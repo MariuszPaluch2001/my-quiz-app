@@ -9,7 +9,6 @@ urlpatterns = [
     path('add_category', views.render_add_category, name="add_category"),
     path('add_question', views.render_add_question, name="add_question"),
     path('register', views.render_register, name="register"),
-    path('login', views.render_login, name="login"),
     
 ]
 

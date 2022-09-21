@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+  <div style=" padding-top: 10%">
+    {% if submitted %}
+      
+    Login succesfull!
+    
+    {% else %}
+  
+      <form action="" method=POST>
+        {% csrf_token %}
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputLogin" class="form-label">Login</label>
+            <input type="text" class="form-control" name="login">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+        </form>
+  
+        <input type="submit" value="Submit" class="btn btn-secondary">
+      </form>
+  
+    {% endif %}    
+  </div>
+  <div style=" padding-top: 3%">
+    <a href="{% url 'register'%}">You don't have account? Register here!</a>
+  </div>
+
+
+  {% endblock %}
