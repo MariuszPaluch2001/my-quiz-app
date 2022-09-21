@@ -78,12 +78,19 @@ WSGI_APPLICATION = 'myquiz.wsgi.application'
 import dj_database_url
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-
+# I know that data should be in .env, but I have some problem with connecting on heroku 
+# with env, so I decided hardcode that data. It's only simple project to learn and propably
+# i remove database and aplication from heroku when i will finish project.
 DATABASES = {
-    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd9a1e200fnlr2j',
+        'USER': 'ffbtpidlgbqjco',
+        'PASSWORD': 'e24fa76dcbf5a99df851dc768d35913e357e92e097aea2deac1aa25e27f80ce0',
+        'HOST': 'ec2-44-206-214-233.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
