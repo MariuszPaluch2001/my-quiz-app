@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import CategoryForm
+from .forms import CategoryForm, CardForm
 # Create your views here.
 
 def render_home(request):
@@ -28,4 +28,14 @@ def render_add_category(request):
     return render(request, "add_category.html", {'form' : form, 'submitted' : submitted})
 
 def render_add_question(request):
-    return render(request, "add_question.html")
+    submitted = False
+    if request.method == "POST":
+        form = CardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_question?submitted=True')
+    else:
+        form = CardForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, "add_question.html", {'form' : form, 'submitted' : submitted})

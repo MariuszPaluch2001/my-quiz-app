@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Category
+from .models import Category, Card
 
 class CategoryForm(ModelForm):
     class Meta:
@@ -17,4 +17,21 @@ class CategoryForm(ModelForm):
             'upper_category' : forms.Select(attrs={'class' : 'form-control'}),
 
         }
-        
+
+class CardForm(ModelForm):
+    class Meta:
+        model = Card
+
+        fields = ['question', 'answer', 'category']
+             
+        labels = {
+            'question' : '',
+            'answer' : '',
+            'category' : ''
+        }
+        widgets = {
+            'question' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Question'}),
+            'answer' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'answer'}),
+            'category' : forms.Select(attrs={'class' : 'form-control'}),
+
+        }
