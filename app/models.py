@@ -116,7 +116,7 @@ class Category(models.Model):
     category_id = models.DecimalField(primary_key=True, max_digits=5, decimal_places=0)
     name = models.CharField(max_length=50)
     creation_date = models.DateField()
-    creator = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    creator = models.ForeignKey(User, models.DO_NOTHING)
     upper_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:

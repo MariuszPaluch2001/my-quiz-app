@@ -17,8 +17,10 @@ def render_add_category(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/register?submitted=True')
+            thought = form.save(commit=False)
+            thought.creator = request.user
+            thought.save()
+            return HttpResponseRedirect('/add_category?submitted=True')
     else:
         form = CategoryForm
         if 'submitted' in request.GET:
