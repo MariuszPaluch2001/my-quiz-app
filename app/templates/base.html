@@ -12,7 +12,7 @@
     </title> 
 </head>
   <body >
-    <nav class="navbar navbar-expand-lg " style="background-color: #D2042D;">
+    <nav class="navbar navbar-expand-lg " style="background-color: #04AA6D;">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'home'%}">MyQuizHub</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +31,21 @@
         </div>
       </nav>
     <div class="container">
+      {% if messages %}
+        <br></br>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+  
+      {% endif %}
         {% block content %}
         {% endblock %}
-    </div>    
+    </div>
+    <br></br>
+    <br></br>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <footer contentEditable>Mariusz Paluch &#169 2022</footer>
 </body>

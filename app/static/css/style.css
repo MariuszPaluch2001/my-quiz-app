@@ -1,6 +1,6 @@
 body {
-    background-color: #082567;
-    color: white;
+    background-color: rgb(170, 204, 222);
+    color: black;
 }
 footer {
     display:flex;

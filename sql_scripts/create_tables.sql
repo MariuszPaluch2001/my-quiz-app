@@ -69,17 +69,14 @@ ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach
 
 CREATE TABLE app_user (
     user_id       NUMERIC(4) NOT NULL,
-    email         VARCHAR(70) NOT NULL,
     login         VARCHAR(30) NOT NULL,
-    password_hash VARCHAR(300) NOT NULL,
-    creation_date DATE NOT NULL
+    creation_date DATE NOT NULL,
+    auth_user_id INT NOT NULL
 );
 
 ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
 
 ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
-
-ALTER TABLE app_user ADD CONSTRAINT email__un UNIQUE ( email );
 
 CREATE TABLE user_attempt (
     return_time      TIMESTAMP NOT NULL,
