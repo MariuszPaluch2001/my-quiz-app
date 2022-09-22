@@ -14,6 +14,7 @@ class CategoryForm(ModelForm):
         }
         widgets = {
             'name' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Category name'}),
+            'upper_category' : forms.Select(attrs={'class' : 'form-control'}),
 
         }
         
