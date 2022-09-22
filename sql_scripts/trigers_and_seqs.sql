@@ -16,21 +16,21 @@ CREATE OR REPLACE TRIGGER fkntm_card_answer BEFORE
 
 /*------------------------------------------------------------------------------------------*/
 
-CREATE FUNCTION fkntm_category_function()  
-   RETURNS trigger
-   LANGUAGE PLPGSQL
-AS 
-$$
-BEGIN
-	 RAISE EXCEPTION 'Non Transferable FK constraint  on table Category is violated';
+-- CREATE FUNCTION fkntm_category_function()  
+--    RETURNS trigger
+--    LANGUAGE PLPGSQL
+-- AS 
+-- $$
+-- BEGIN
+-- 	 RAISE EXCEPTION 'Non Transferable FK constraint  on table Category is violated';
 	 
-	 RETURN NEW;
-END;
-$$;
+-- 	 RETURN NEW;
+-- END;
+-- $$;
 
-CREATE OR REPLACE TRIGGER fkntm_category BEFORE
-    UPDATE OF creator_id ON category
-    EXECUTE PROCEDURE fkntm_category_function();
+-- CREATE OR REPLACE TRIGGER fkntm_category BEFORE
+--     UPDATE OF creator_id ON category
+--     EXECUTE PROCEDURE fkntm_category_function();
 
 /*------------------------------------------------------------------------------------------*/
 

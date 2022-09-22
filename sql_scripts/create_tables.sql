@@ -17,7 +17,7 @@ CREATE TABLE card_answer (
     solution_timestamp        TIMESTAMP NOT NULL,
     card_id                   NUMERIC(6) NOT NULL,
     return_time               TIMESTAMP NOT NULL,
-    user_id                   NUMERIC(4) NOT NULL,
+    user_id                   INT NOT NULL,
     user_category_id          NUMERIC(5) NOT NULL,
     is_correct                CHAR(1) NOT NULL
 );
@@ -38,7 +38,7 @@ CREATE TABLE category (
     category_id       NUMERIC(5) NOT NULL,
     name              VARCHAR(50) NOT NULL,
     creation_date     DATE NOT NULL,
-    creator_id        NUMERIC(4) NOT NULL,
+    creator_id        INT NOT NULL,
     upper_category_id NUMERIC(5)
 );
 
@@ -67,20 +67,20 @@ CREATE INDEX card__idx ON
 
 ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach_id );
 
-CREATE TABLE app_user (
-    user_id       NUMERIC(4) NOT NULL,
-    login         VARCHAR(30) NOT NULL,
-    creation_date DATE NOT NULL,
-    auth_user_id INT NOT NULL
-);
+-- CREATE TABLE app_user (
+--     user_id       NUMERIC(4) NOT NULL,
+--     login         VARCHAR(30) NOT NULL,
+--     creation_date DATE NOT NULL,
+--     auth_user_id INT NOT NULL
+-- );
 
-ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
+-- ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
 
-ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
+-- ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
 
 CREATE TABLE user_attempt (
     return_time      TIMESTAMP NOT NULL,
-    user_id          NUMERIC(4) NOT NULL,
+    user_id          INT NOT NULL,
     user_category_id NUMERIC(5) NOT NULL
 );
 
@@ -91,7 +91,7 @@ ALTER TABLE user_attempt
 
 CREATE TABLE user_category (
     category_id NUMERIC(5) NOT NULL,
-    user_id     NUMERIC(4) NOT NULL
+    user_id     INT NOT NULL
 );
 
 CREATE INDEX user_category__id ON
@@ -118,9 +118,9 @@ ALTER TABLE card
     ADD CONSTRAINT card_category_fk FOREIGN KEY ( category_id )
         REFERENCES category ( category_id );
 
-ALTER TABLE category
-    ADD CONSTRAINT category_user_fk FOREIGN KEY ( creator_id )
-        REFERENCES app_user ( user_id );
+-- ALTER TABLE category
+--     ADD CONSTRAINT category_user_fk FOREIGN KEY ( creator_id )
+--         REFERENCES app_user ( user_id );
 
 ALTER TABLE multimedia_attach
     ADD CONSTRAINT mult_attach_card_fk FOREIGN KEY ( card_id )
@@ -140,7 +140,7 @@ ALTER TABLE user_category
     ADD CONSTRAINT user_category_category_fk FOREIGN KEY ( category_id )
         REFERENCES category ( category_id );
 
-ALTER TABLE user_category
-    ADD CONSTRAINT user_category_user_fk FOREIGN KEY ( user_id )
-        REFERENCES app_user ( user_id );
+-- ALTER TABLE user_category
+--     ADD CONSTRAINT user_category_user_fk FOREIGN KEY ( user_id )
+--         REFERENCES app_user ( user_id );
 

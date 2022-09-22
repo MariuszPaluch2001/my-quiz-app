@@ -1,16 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class AppUser(models.Model):
+# class AppUser(models.Model):
 
-    user_id = models.DecimalField(primary_key=True, max_digits=4, decimal_places=0)
-    login = models.CharField(unique=True, max_length=30)
-    creation_date = models.DateField()
-    auth_user = models.OneToOneField(User, null=True, on_delete = models.CASCADE)
+#     user_id = models.DecimalField(primary_key=True, max_digits=4, decimal_places=0)
+#     login = models.CharField(unique=True, max_length=30)
+#     creation_date = models.DateField()
+#     auth_user = models.OneToOneField(User, null=True, on_delete = models.CASCADE)
 
-    class Meta:
-        managed = False
-        db_table = 'app_user'
+#     class Meta:
+#         managed = False
+#         db_table = 'app_user'
 
 
 class AuthGroup(models.Model):
@@ -59,6 +59,8 @@ class AuthUser(models.Model):
         managed = False
         db_table = 'auth_user'
 
+    def __str__(self):
+        return self.username
 
 class AuthUserGroups(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -91,6 +93,7 @@ class Card(models.Model):
     class Meta:
         managed = False
         db_table = 'card'
+    
 
 
 class CardAnswer(models.Model):
@@ -111,13 +114,15 @@ class Category(models.Model):
     category_id = models.DecimalField(primary_key=True, max_digits=5, decimal_places=0)
     name = models.CharField(max_length=50)
     creation_date = models.DateField()
-    creator = models.ForeignKey(AppUser, models.DO_NOTHING)
+    creator = models.ForeignKey(AuthUser, models.DO_NOTHING)
     upper_category = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'category'
 
+    def __str__(self) -> str:
+        return self.name
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
@@ -187,7 +192,7 @@ class UserAttempt(models.Model):
 
 class UserCategory(models.Model):
     category = models.ForeignKey(Category, models.DO_NOTHING)
-    user = models.OneToOneField(AppUser, models.DO_NOTHING, primary_key=True)
+    user = models.OneToOneField(AuthUser, models.DO_NOTHING, primary_key=True)
 
     class Meta:
         managed = False

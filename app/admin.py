@@ -3,7 +3,7 @@ from .models import *
 
 
 admin.site.register(AuthUser)
-admin.site.register(AppUser)
+# admin.site.register(AppUser)
 admin.site.register(Card)
 admin.site.register(CardAnswer)
 admin.site.register(MultimediaAttach)
