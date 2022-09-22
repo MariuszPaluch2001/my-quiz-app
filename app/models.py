@@ -94,6 +94,8 @@ class Card(models.Model):
         managed = False
         db_table = 'card'
     
+    def __str__(self) -> str:
+        return self.question
 
 
 class CardAnswer(models.Model):
