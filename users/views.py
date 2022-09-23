@@ -34,3 +34,8 @@ def register_user(request):
         form = RegisterUserForm()
 
     return render(request, 'authenticate/register.html', {'form' : form})
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You were logout."))
+    return redirect('home')
