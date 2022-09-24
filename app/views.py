@@ -30,12 +30,12 @@ def render_add_category(request):
 def render_add_question(request):
     submitted = False
     if request.method == "POST":
-        form = CardForm(request.POST)
+        form = CardForm(request.user, request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_question?submitted=True')
     else:
-        form = CardForm
+        form = CardForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
     return render(request, "add_question.html", {'form' : form, 'submitted' : submitted})

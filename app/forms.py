@@ -42,3 +42,8 @@ class CardForm(ModelForm):
             'category' : forms.Select(attrs={'class' : 'form-control'}),
 
         }
+
+    def __init__(self, user=None, *args, **kwargs):
+        super(ModelForm, self).__init__(*args,**kwargs)
+        if user:
+            self.fields['category'].queryset = Category.objects.filter(creator=user)
