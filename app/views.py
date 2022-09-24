@@ -15,14 +15,14 @@ def render_quiz_menu(request):
 def render_add_category(request):
     submitted = False
     if request.method == "POST":
-        form = CategoryForm(request.POST)
+        form = CategoryForm(request.user, request.POST)
         if form.is_valid():
             thought = form.save(commit=False)
             thought.creator = request.user
             thought.save()
             return HttpResponseRedirect('/add_category?submitted=True')
     else:
-        form = CategoryForm
+        form = CategoryForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
     return render(request, "add_category.html", {'form' : form, 'submitted' : submitted})

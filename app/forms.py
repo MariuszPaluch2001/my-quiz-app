@@ -3,7 +3,9 @@ from django.forms import ModelForm
 from .models import Category, Card
 
 class CategoryForm(ModelForm):
+    
     class Meta:
+
         model = Category
 
         fields = ['name', 'upper_category']
@@ -17,6 +19,11 @@ class CategoryForm(ModelForm):
             'upper_category' : forms.Select(attrs={'class' : 'form-control'}),
 
         }
+
+    def __init__(self, user=None, *args, **kwargs):
+        super(ModelForm, self).__init__(*args,**kwargs)
+        if user:
+            self.fields['upper_category'].queryset = Category.objects.filter(creator=user)
 
 class CardForm(ModelForm):
     class Meta:
