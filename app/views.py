@@ -18,14 +18,17 @@ def render_quiz_menu(request):
 def render_add_category(request):
     submitted = False
     if request.method == "POST":
-        form = CategoryForm(request.user, request.POST)
+        form = CategoryForm(request.user,None, request.POST)
         if form.is_valid():
             thought = form.save(commit=False)
             thought.creator = request.user
             thought.save()
             return HttpResponseRedirect('/add_category?submitted=True')
     else:
-        form = CategoryForm(request.user)
+        if 'category_id' in request.GET:
+            form = CategoryForm(request.user, request.GET["category_id"])
+        else:
+            form = CategoryForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
     return render(request, "add_category.html", {'form' : form, 'submitted' : submitted})
@@ -33,12 +36,15 @@ def render_add_category(request):
 def render_add_question(request):
     submitted = False
     if request.method == "POST":
-        form = CardForm(request.user, request.POST)
+        form = CardForm(request.user, None, request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_question?submitted=True')
     else:
-        form = CardForm(request.user)
+        if 'category_id' in request.GET:
+            form = CardForm(request.user, request.GET["category_id"])
+        else:
+            form = CardForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
     return render(request, "add_question.html", {'form' : form, 'submitted' : submitted})
@@ -48,7 +54,7 @@ def render_display_category(request):
     res = Category.objects.get(category_id= category_id)
     questions_numb = len(tuple(Card.objects.filter(category = category_id)))
     child_categorys = Category.objects.filter(upper_category = category_id)
-    is_creator = Category.objects.filter(creator= request.user)
+    is_creator = request.user == res.creator
     return render(request, "display_category.html", {
         'res' : res, 
         'q_numb' : questions_numb, 

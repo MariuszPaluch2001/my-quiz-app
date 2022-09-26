@@ -20,10 +20,12 @@ class CategoryForm(ModelForm):
 
         }
 
-    def __init__(self, user=None, *args, **kwargs):
+    def __init__(self, user=None, upper_category_initial = None ,*args, **kwargs):
         super(ModelForm, self).__init__(*args,**kwargs)
         if user:
             self.fields['upper_category'].queryset = Category.objects.filter(creator=user)
+        if upper_category_initial:    
+            self.initial['upper_category'] = Category.objects.get(category_id = upper_category_initial)
 
 class CardForm(ModelForm):
     class Meta:
@@ -43,7 +45,9 @@ class CardForm(ModelForm):
 
         }
 
-    def __init__(self, user=None, *args, **kwargs):
+    def __init__(self, user=None, category_initial = None, *args, **kwargs):
         super(ModelForm, self).__init__(*args,**kwargs)
         if user:
             self.fields['category'].queryset = Category.objects.filter(creator=user)
+        if category_initial:    
+            self.initial['category'] = Category.objects.get(category_id = category_initial)

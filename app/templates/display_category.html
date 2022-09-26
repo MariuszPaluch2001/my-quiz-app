@@ -14,17 +14,16 @@
         </ul>
         <p>Questions: {{q_numb}}</p>
     </div>
-
     <div>
         {% if q_numb > 0 %}
             <a href="">
                 <button class="btn btn-secondary">Start</button>
             </a>
         {% endif %}
-        <a href="{% url 'add_question'%}?category_id={{res.category_id}}">
-            <button class="btn btn-secondary">Add question</button>
-        </a>
         {% if is_creator %}
+            <a href="{% url 'add_question'%}?category_id={{res.category_id}}">
+                <button class="btn btn-secondary">Add question</button>
+            </a>
             <a href="{% url 'add_category'%}?category_id={{res.category_id}}">
                 <button class="btn btn-secondary">Add sub-category</button>
             </a>
