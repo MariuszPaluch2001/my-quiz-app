@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+  <br>
+    <div>
+        <h1>Category: {{card.category}}</h1>
+        <br>
+        <br>
+        <h2 style="text-align:center">Question: {{card.question}}</h2>
+        <h2 style="text-align:center;visibility:hidden;" id="answer">Answer: {{card.question}}</h2>
+        <button type="button" class="btn btn-secondary" style="margin:auto;display:block" onclick="show()">Show</button>
+        <br>
+        <button type="button" style="margin:auto;display:block;visibility:hidden;" 
+                class="btn btn-secondary" onclick="show()" id="next">
+                Go next
+        </button>
+        <script>
+            answer = document.getElementById("answer")
+            next = document.getElementById("next")
+            function show(){
+                answer.style.visibility = "visible"
+                next.style.visibility = "visible"
+            }
+        </script>
+    </div>
+
+    
+  {% endblock %}

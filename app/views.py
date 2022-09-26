@@ -61,3 +61,11 @@ def render_display_category(request):
         'child_categorys' : child_categorys,
         'is_creator' : is_creator    
     })
+
+def render_display_question(request):
+    card_id = request.GET["card_id"]
+    card = Card.objects.get(card_id = card_id)
+
+    return render(request, "display_question.html",{
+        'card' : card
+    })
