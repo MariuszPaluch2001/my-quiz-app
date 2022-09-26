@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+  <br>
+    <div>
+        <h1>Category: {{res.name}}</h1>
+        <p>Uploaded: <i>{{res.creation_date}}</i></p>
+        <p>Author: <i>{{res.creator}}</i></p>
+        <p>Child categories:</p>
+        <ul>
+            {% for child in child_categorys %}
+                <a href="{% url 'display_category'%}?category_id={{child.category_id}}"><li>{{ child.name }}</li></a>
+            {% endfor %}
+        </ul>
+        <p>Questions: {{q_numb}}</p>
+    </div>
+
+    <div>
+        {% if q_numb > 0 %}
+            <a href="">
+                <button class="btn btn-secondary">Start</button>
+            </a>
+        {% endif %}
+        <a href="{% url 'add_question'%}?category_id={{res.category_id}}">
+            <button class="btn btn-secondary">Add question</button>
+        </a>
+        {% if is_creator %}
+            <a href="{% url 'add_category'%}?category_id={{res.category_id}}">
+                <button class="btn btn-secondary">Add sub-category</button>
+            </a>
+        {% endif %}
+
+        </div>
+    
+  {% endblock %}
