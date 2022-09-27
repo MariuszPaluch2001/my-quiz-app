@@ -2,10 +2,13 @@
 
   {% block content %}
   <br>
-  <div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="Search categories" aria-label="Search" aria-describedby="search-addon" />
-    <button type="button" class="btn btn-primary">Search</button>
-  </div>
+  <form method="POST" action="{% url 'search_categories' %}">
+    {% csrf_token %}
+    <div class="input-group">
+      <input name ="searched" type="search" class="form-control rounded" placeholder="Search categories" aria-label="Search" aria-describedby="search-addon" />
+      <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
+  </form>
   <br>
   <h2>Newest categories:</h2>
   <ul>

@@ -10,7 +10,8 @@ urlpatterns = [
     path('add_question', views.render_add_question, name="add_question"),
     path('display_category', views.render_display_category, name="display_category"),
     path('display_question', views.render_display_question, name="display_question"),
-    path('quiz_menu', views.render_quiz_menu, name="quiz_menu")
+    path('quiz_menu', views.render_quiz_menu, name="quiz_menu"),
+    path('search_categories', views.render_search_categories, name="search_categories"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

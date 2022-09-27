@@ -80,3 +80,16 @@ def render_quiz_menu(request):
     return render(request, "quiz_menu.html", {
         'newest': newest_categories
     })
+
+def render_search_categories(request):
+    if request.method == "POST":
+        searched = request.POST["searched"]
+        categories = Category.objects.filter(name__icontains = searched)
+        return render(request, "search_categories.html", {
+            'searched' : searched,
+            'categories' : categories
+        })
+    else:
+        return render(request, "search_categories.html", {
+
+        })
