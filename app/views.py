@@ -69,3 +69,14 @@ def render_display_question(request):
     return render(request, "display_question.html",{
         'card' : card
     })
+
+def render_quiz_menu(request):
+    categories = Category.objects.order_by('-creation_date')
+    print(categories.count())
+    if categories.count() > 5:
+        newest_categories = categories[:5]
+    else:
+        newest_categories = categories
+    return render(request, "quiz_menu.html", {
+        'newest': newest_categories
+    })

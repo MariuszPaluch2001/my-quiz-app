@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
   {% block content %}
-    <p>Quiz menu page</p>
+  <br>
+  <h2>Newest categories:</h2>
+  <ul>
+    {% for category in newest %}
+        <a href="{% url 'display_category'%}?category_id={{category.category_id}}">
+          <li>
+            {{ category.name }}
+          </li>
+        </a>
+    {% endfor %}
+  </ul>
+  <h2>Most popular categories:</h2>
+  <ul>
+    <li>Placeholder</li>
+    <li>Placeholder</li>
+    <li>Placeholder</li>
+    <li>Placeholder</li>
+    <li>Placeholder</li>
+  </ul>
   {% endblock %}
