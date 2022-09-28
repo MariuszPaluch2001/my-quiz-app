@@ -3,23 +3,35 @@
   {% block content %}
   <br>
     <div>
-        <h1>Category: {{card.category}}</h1>
+        <h1>Category: {{category.name}}</h1>
         <br>
         <br>
-        <h2 style="text-align:center">Question: {{card.question}}</h2>
-        <h2 style="text-align:center;visibility:hidden;" id="answer">Answer: {{card.question}}</h2>
-        <button type="button" class="btn btn-secondary" style="margin:auto;display:block" onclick="show()">Show</button>
-        <br>
-        <button type="button" style="margin:auto;display:block;visibility:hidden;" 
-                class="btn btn-secondary" onclick="show()" id="next">
-                Go next
-        </button>
+        {% for card in cards %}
+        <div class="shadow p-4 mb-5 bg-body rounded">
+          <h2 style="text-align:center">Question: {{card.question}}</h2>
+          <h2 style="text-align:center;visibility:hidden;" id="{{ card.card_id }}">Answer: {{card.answer}}</h2>
+          <button id="button{{ card.card_id }}"type="button" class="btn btn-secondary" style="margin:auto;display:block" onclick="show('{{ card.card_id }}')">Show</button>
+          <center>
+            <button id="button-yes{{ card.card_id }}"type="button" class="btn btn-success" 
+              style="visibility:hidden;">I knew</button>
+            <button id="button-no{{ card.card_id }}"type="button" class="btn btn-danger" 
+              style="visibility:hidden">I didn't know</button>
+          </center>
+        </div>
+        {% endfor %}
+        <center>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </center>
         <script>
-            answer = document.getElementById("answer")
-            next = document.getElementById("next")
-            function show(){
+            function show(id){
+                answer = document.getElementById(id)
+                button = document.getElementById("button" + id)
+                button_yes = document.getElementById("button-yes" + id)
+                button_no  = document.getElementById("button-no" + id)
                 answer.style.visibility = "visible"
-                next.style.visibility = "visible"
+                button.style.visibility = "hidden"
+                button_no.style.visibility = "visible"
+                button_yes.style.visibility = "visible"
             }
         </script>
     </div>

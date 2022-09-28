@@ -16,7 +16,8 @@
     </div>
     <div>
         {% if q_numb > 0 %}
-            <a href="">
+            <input type="number" id="points" name="Cards number" step="1" max="100" min="1"><br><br>
+            <a onclick="set_href()" id="button">
                 <button class="btn btn-secondary">Start</button>
             </a>
         {% endif %}
@@ -28,7 +29,12 @@
                 <button class="btn btn-secondary">Add sub-category</button>
             </a>
         {% endif %}
-
         </div>
-    
+        <script>
+            function set_href(){
+                button = document.getElementById("button")
+                value = document.getElementById("points").value
+                window.location.href = "{% url 'display_question'%}?category_id={{res.category_id}}&cards_numb=" + value
+            }
+        </script>
   {% endblock %}
