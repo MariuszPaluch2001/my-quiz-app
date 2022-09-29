@@ -14,6 +14,7 @@ CREATE INDEX category__idx ON
 ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
+    card_answer_id            INT NOT NULL,
     attempt_id                INT NOT NULL,
     solution_timestamp        TIMESTAMP NOT NULL,
     card_id                   NUMERIC(6) NOT NULL,
@@ -26,8 +27,9 @@ CREATE INDEX card_answer__idx ON
     ASC );
 
 ALTER TABLE card_answer
-    ADD CONSTRAINT card_answer_pk PRIMARY KEY ( card_id,
-                                                solution_timestamp );
+    ADD CONSTRAINT card_answer_pk PRIMARY KEY(
+                                                card_answer_id
+                                            );
 
 CREATE TABLE category (
     category_id       NUMERIC(5) NOT NULL,

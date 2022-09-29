@@ -2,6 +2,9 @@ DROP TRIGGER attach_trigger ON multimedia_attach;
 DROP FUNCTION attach_trigger_function;
 DROP SEQUENCE attach_sequence;
 
+DROP TRIGGER card_answer_trigger ON CARD_ANSWER;
+DROP FUNCTION card_answer_trigger_function;
+DROP SEQUENCE card_answer_sequence;
 
 DROP TRIGGER category_trigger ON category;
 DROP FUNCTION category_trigger_function;

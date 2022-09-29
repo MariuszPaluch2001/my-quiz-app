@@ -99,17 +99,15 @@ class Card(models.Model):
 
 
 class CardAnswer(models.Model):
+    card_answer_id = models.AutoField(primary_key=True)
+    user_attempt = models.OneToOneField('UserAttempt', models.DO_NOTHING)
     solution_timestamp = models.DateTimeField()
     card = models.ForeignKey(Card, models.DO_NOTHING)
-    return_time = models.OneToOneField('UserAttempt', models.DO_NOTHING, db_column='return_time', primary_key=True)
-    user_id = models.DecimalField(max_digits=4, decimal_places=0)
-    user_category_id = models.DecimalField(max_digits=5, decimal_places=0)
     is_correct = models.CharField(max_length=1)
-
     class Meta:
         managed = False
         db_table = 'card_answer'
-        unique_together = (('return_time', 'user_id', 'user_category_id', 'card', 'solution_timestamp'),)
+        unique_together = (('user_attempt', 'card', 'solution_timestamp'),)
 
 
 class Category(models.Model):
