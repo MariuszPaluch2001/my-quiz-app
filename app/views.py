@@ -102,20 +102,24 @@ def create_user_attempt(user_category, category_id):
 
 
 def render_display_question(request):
-    category_id = request.GET["category_id"]
-    cards_numb = int(request.GET["cards_numb"])
-    cards = Card.objects.filter(category=category_id)
-    cards_numb = cards_numb_check(cards, cards_numb)
-    cards = shuffle_cards(cards, cards_numb)
-    category = Category.objects.get(category_id=category_id)
-    user_category = get_user_category(request.user.id, category)
-    user_attempt = create_user_attempt(user_category, category_id)
-
-    return render(request, "display_question.html", {
-        'cards': cards,
-        'category': category
-    })
-
+    if request.user.is_authenticated:
+        category_id = request.GET["category_id"]
+        cards_numb = int(request.GET["cards_numb"])
+        cards = Card.objects.filter(category=category_id)
+        cards_numb = cards_numb_check(cards, cards_numb)
+        cards = shuffle_cards(cards, cards_numb)
+        category = Category.objects.get(category_id=category_id)
+        user_category = get_user_category(request.user.id, category)
+        user_attempt = create_user_attempt(user_category, category_id)        
+        return render(request, "display_question.html", {
+            'cards': cards,
+            'category': category,
+            'is_auth' : True
+        })
+    else:
+        return render(request, "display_question.html", {
+            'is_auth' : False
+        })
 def get_most_popular_cat():
     popular_cat_ids = UserCategory.objects.values('category_id').annotate(c=Count('category_id')).order_by("-c")
     popular_cat_ids = list(popular_cat_ids)
