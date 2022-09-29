@@ -14,11 +14,9 @@ CREATE INDEX category__idx ON
 ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
+    attempt_id                INT NOT NULL,
     solution_timestamp        TIMESTAMP NOT NULL,
     card_id                   NUMERIC(6) NOT NULL,
-    return_time               TIMESTAMP NOT NULL,
-    user_id                   INT NOT NULL,
-    user_category_id          NUMERIC(5) NOT NULL,
     is_correct                CHAR(1) NOT NULL
 );
 
@@ -28,10 +26,7 @@ CREATE INDEX card_answer__idx ON
     ASC );
 
 ALTER TABLE card_answer
-    ADD CONSTRAINT card_answer_pk PRIMARY KEY ( return_time,
-                                                user_id,
-                                                user_category_id,
-                                                card_id,
+    ADD CONSTRAINT card_answer_pk PRIMARY KEY ( card_id,
                                                 solution_timestamp );
 
 CREATE TABLE category (
@@ -67,27 +62,15 @@ CREATE INDEX card__idx ON
 
 ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach_id );
 
--- CREATE TABLE app_user (
---     user_id       NUMERIC(4) NOT NULL,
---     login         VARCHAR(30) NOT NULL,
---     creation_date DATE NOT NULL,
---     auth_user_id INT NOT NULL
--- );
-
--- ALTER TABLE app_user ADD CONSTRAINT user_pk PRIMARY KEY ( user_id );
-
--- ALTER TABLE app_user ADD CONSTRAINT login__un UNIQUE ( login );
-
 CREATE TABLE user_attempt (
+    attempt_id       INT NOT NULL,
     return_time      TIMESTAMP NOT NULL,
     user_id          INT NOT NULL,
     user_category_id NUMERIC(5) NOT NULL
 );
 
 ALTER TABLE user_attempt
-    ADD CONSTRAINT user_attempt_pk PRIMARY KEY ( user_id,
-                                                 user_category_id,
-                                                 return_time );
+    ADD CONSTRAINT user_attempt_pk PRIMARY KEY (attempt_id);
 
 CREATE TABLE user_category (
     category_id NUMERIC(5) NOT NULL,
@@ -107,20 +90,13 @@ ALTER TABLE card_answer
         REFERENCES card ( card_id );
 
 ALTER TABLE card_answer
-    ADD CONSTRAINT card_answer_user_attempt_fk FOREIGN KEY ( return_time,
-                                                             user_id,
-                                                             user_category_id )
-        REFERENCES user_attempt ( return_time,
-                                  user_id,
-                                  user_category_id);
+    ADD CONSTRAINT card_answer_user_attempt_fk FOREIGN KEY (attempt_id)
+        REFERENCES user_attempt (attempt_id);
 
 ALTER TABLE card
     ADD CONSTRAINT card_category_fk FOREIGN KEY ( category_id )
         REFERENCES category ( category_id );
 
--- ALTER TABLE category
---     ADD CONSTRAINT category_user_fk FOREIGN KEY ( creator_id )
---         REFERENCES app_user ( user_id );
 
 ALTER TABLE multimedia_attach
     ADD CONSTRAINT mult_attach_card_fk FOREIGN KEY ( card_id )

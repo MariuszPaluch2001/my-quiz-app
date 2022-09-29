@@ -1,7 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .models import Category, Card
+from .models import Category, Card, UserAttempt, UserCategory, AuthUser
 from .forms import CategoryForm, CardForm
 
 import random
@@ -63,16 +64,33 @@ def render_display_category(request):
         'is_creator' : is_creator,
     })
 
+def shuffle_cards(cards, n):
+    cards = list(cards)
+    random.shuffle(cards)
+    cards = cards[:n]
+    return cards
+
+def get_user_category(id, category):
+    auth_user = AuthUser.objects.get(id = id)
+    try:
+        user_category = UserCategory.objects.get(user = auth_user, category = category)
+    except ObjectDoesNotExist:
+        user_category = UserCategory(user = auth_user, category = category)
+        user_category.save(force_insert=True)
+    return user_category
+
+
 def render_display_question(request):
     category_id = request.GET["category_id"]
     cards_numb = int(request.GET["cards_numb"])
     cards = Card.objects.filter(category = category_id)
     if cards_numb > cards.count():
         cards_numb = cards.count()
-    cards = list(cards)
-    random.shuffle(cards)
-    cards = cards[:cards_numb]
+    cards = shuffle_cards(cards, cards_numb)
     category = Category.objects.get(category_id = category_id)
+    user_category = get_user_category(request.user.id, category)
+    user_attempt = UserAttempt(user = user_category, user_category_id = category_id)
+    user_attempt.save(force_insert=True)
     return render(request, "display_question.html",{
         'cards' : cards,
         'category' : category

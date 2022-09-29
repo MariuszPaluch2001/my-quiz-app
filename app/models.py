@@ -180,17 +180,16 @@ class MultimediaAttach(models.Model):
         managed = False
         db_table = 'multimedia_attach'
 
-
 class UserAttempt(models.Model):
-    return_time = models.DateTimeField()
-    user = models.OneToOneField('UserCategory', models.DO_NOTHING, primary_key=True)
+    attempt_id = models.AutoField(primary_key=True)
+    return_time = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField('UserCategory', models.DO_NOTHING)
     user_category_id = models.DecimalField(max_digits=5, decimal_places=0)
-
+    
     class Meta:
         managed = False
         db_table = 'user_attempt'
         unique_together = (('user', 'user_category_id', 'return_time'),)
-
 
 class UserCategory(models.Model):
     category = models.ForeignKey(Category, models.DO_NOTHING)
