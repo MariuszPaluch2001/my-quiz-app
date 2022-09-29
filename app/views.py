@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -7,21 +8,23 @@ from .forms import CategoryForm, CardForm
 
 import random
 
-# Create your views here.
 
 def render_home(request):
     return render(request, "home.html")
 
+
 def render_about(request):
     return render(request, "about.html")
+
 
 def render_quiz_menu(request):
     return render(request, "quiz_menu.html")
 
+
 def render_add_category(request):
     submitted = False
     if request.method == "POST":
-        form = CategoryForm(request.user,None, request.POST)
+        form = CategoryForm(request.user, None, request.POST)
         if form.is_valid():
             thought = form.save(commit=False)
             thought.creator = request.user
@@ -34,7 +37,8 @@ def render_add_category(request):
             form = CategoryForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, "add_category.html", {'form' : form, 'submitted' : submitted})
+    return render(request, "add_category.html", {'form': form, 'submitted': submitted})
+
 
 def render_add_question(request):
     submitted = False
@@ -50,19 +54,21 @@ def render_add_question(request):
             form = CardForm(request.user)
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, "add_question.html", {'form' : form, 'submitted' : submitted})
+    return render(request, "add_question.html", {'form': form, 'submitted': submitted})
+
 
 def render_display_category(request):
     category_id = request.GET["category_id"]
-    res = Category.objects.get(category_id= category_id)
-    child_categorys = Category.objects.filter(upper_category = category_id)
+    res = Category.objects.get(category_id=category_id)
+    child_categorys = Category.objects.filter(upper_category=category_id)
     is_creator = request.user == res.creator
     return render(request, "display_category.html", {
-        'res' : res, 
-        'q_numb' : Card.objects.filter(category = category_id).count(), 
-        'child_categorys' : child_categorys,
-        'is_creator' : is_creator,
+        'res': res,
+        'q_numb': Card.objects.filter(category=category_id).count(),
+        'child_categorys': child_categorys,
+        'is_creator': is_creator,
     })
+
 
 def shuffle_cards(cards, n):
     cards = list(cards)
@@ -70,31 +76,51 @@ def shuffle_cards(cards, n):
     cards = cards[:n]
     return cards
 
+
 def get_user_category(id, category):
-    auth_user = AuthUser.objects.get(id = id)
+    auth_user = AuthUser.objects.get(id=id)
     try:
-        user_category = UserCategory.objects.get(user = auth_user, category = category)
+        user_category = UserCategory.objects.get(
+            user=auth_user, category=category)
     except ObjectDoesNotExist:
-        user_category = UserCategory(user = auth_user, category = category)
+        user_category = UserCategory(user=auth_user, category=category)
         user_category.save(force_insert=True)
     return user_category
+
+
+def cards_numb_check(cards, cards_numb):
+    if cards_numb > cards.count():
+        cards_numb = cards.count()
+    return cards_numb
+
+
+def create_user_attempt(user_category, category_id):
+    user_attempt = UserAttempt(
+        user=user_category, user_category_id=category_id)
+    user_attempt.save(force_insert=True)
+    return user_attempt
 
 
 def render_display_question(request):
     category_id = request.GET["category_id"]
     cards_numb = int(request.GET["cards_numb"])
-    cards = Card.objects.filter(category = category_id)
-    if cards_numb > cards.count():
-        cards_numb = cards.count()
+    cards = Card.objects.filter(category=category_id)
+    cards_numb = cards_numb_check(cards, cards_numb)
     cards = shuffle_cards(cards, cards_numb)
-    category = Category.objects.get(category_id = category_id)
+    category = Category.objects.get(category_id=category_id)
     user_category = get_user_category(request.user.id, category)
-    user_attempt = UserAttempt(user = user_category, user_category_id = category_id)
-    user_attempt.save(force_insert=True)
-    return render(request, "display_question.html",{
-        'cards' : cards,
-        'category' : category
+    user_attempt = create_user_attempt(user_category, category_id)
+
+    return render(request, "display_question.html", {
+        'cards': cards,
+        'category': category
     })
+
+def get_most_popular_cat():
+    popular_cat_ids = UserCategory.objects.values('category_id').annotate(c=Count('category_id')).order_by("-c")
+    popular_cat_ids = list(popular_cat_ids)
+    popular_cat_ids = [id['category_id'] for id in popular_cat_ids]
+    return Category.objects.filter(category_id__in = popular_cat_ids)
 
 def render_quiz_menu(request):
     categories = Category.objects.order_by('-creation_date')
@@ -102,17 +128,20 @@ def render_quiz_menu(request):
         newest_categories = categories[:5]
     else:
         newest_categories = categories
+    popular_cat = get_most_popular_cat()
     return render(request, "quiz_menu.html", {
-        'newest': newest_categories
+        'newest': newest_categories,
+        'popular' : popular_cat
     })
+
 
 def render_search_categories(request):
     if request.method == "POST":
         searched = request.POST["searched"]
-        categories = Category.objects.filter(name__icontains = searched)
+        categories = Category.objects.filter(name__icontains=searched)
         return render(request, "search_categories.html", {
-            'searched' : searched,
-            'categories' : categories
+            'searched': searched,
+            'categories': categories
         })
     else:
         return render(request, "search_categories.html", {
