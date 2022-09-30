@@ -84,7 +84,7 @@ CREATE FUNCTION user_attempt_trigger_function()
 AS 
 $$
 BEGIN
-    new.attempt_id := nextval('user_attempt_sequence');
+    new.user_attempt_id := nextval('user_attempt_sequence');
     RETURN NEW;
 END;
 $$;
@@ -92,7 +92,7 @@ $$;
 CREATE OR REPLACE TRIGGER user_attempt_trigger BEFORE
     INSERT ON USER_ATTEMPT
     FOR EACH ROW
-    WHEN ( new.attempt_id IS NULL )
+    WHEN ( new.user_attempt_id IS NULL )
     EXECUTE PROCEDURE user_attempt_trigger_function();
 
 /*-------------------------------------------------------------------------------------------------*/
@@ -114,4 +114,4 @@ CREATE OR REPLACE TRIGGER card_answer_trigger BEFORE
     INSERT ON CARD_ANSWER
     FOR EACH ROW
     WHEN ( new.card_answer_id IS NULL )
-    EXECUTE PROCEDURE user_attempt_trigger_function();
+    EXECUTE PROCEDURE card_answer_trigger_function();

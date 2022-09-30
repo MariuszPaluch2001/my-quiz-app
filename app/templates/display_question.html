@@ -7,32 +7,32 @@
           <h1>Category: {{category.name}}</h1>
           <br>
           <br>
-          {% for card in cards %}
-          <div class="shadow p-4 mb-5 bg-body rounded">
-            <h2 style="text-align:center">Question: {{card.question}}</h2>
-            <h2 style="text-align:center;visibility:hidden;" id="{{ card.card_id }}">Answer: {{card.answer}}</h2>
-            <button id="button{{ card.card_id }}"type="button" class="btn btn-secondary" style="margin:auto;display:block" onclick="show('{{ card.card_id }}')">Show</button>
-            <center>
-              <button id="button-yes{{ card.card_id }}"type="button" class="btn btn-success" 
-                style="visibility:hidden;">I knew</button>
-              <button id="button-no{{ card.card_id }}"type="button" class="btn btn-danger" 
-                style="visibility:hidden">I didn't know</button>
-            </center>
+          <form method="POST">
+            {% csrf_token %}
+            {% for card in cards %}
+              <div class="shadow p-4 mb-5 bg-body rounded">
+                <h2 style="text-align:center">Question: {{card.question}}</h2>
+                <h2 style="text-align:center;visibility:hidden;" id="{{ card.card_id }}">Answer: {{card.answer}}</h2>
+                <button id="button{{ card.card_id }}"type="button" class="btn btn-secondary" style="margin:auto;display:block" onclick="show('{{ card.card_id }}')">Show</button>
+                <center id="center{{ card.card_id }}" style="visibility:hidden">
+                    <input type="radio" name="{{ card.card_id }}" value="Y" >Yes</input>
+                    <input type="radio" name="{{ card.card_id }}" value="N" checked="checked">No</input>
+                </center>
           </div>
           {% endfor %}
           <center>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="attempt_id" value="{{ user_attempt.user_attempt_id }}">
+            <input type="submit" value="Submit" class="btn btn-secondary">
           </center>
+          </form>
           <script>
               function show(id){
                   answer = document.getElementById(id)
                   button = document.getElementById("button" + id)
-                  button_yes = document.getElementById("button-yes" + id)
-                  button_no  = document.getElementById("button-no" + id)
+                  center = document.getElementById("center" + id)
                   answer.style.visibility = "visible"
                   button.style.visibility = "hidden"
-                  button_no.style.visibility = "visible"
-                  button_yes.style.visibility = "visible"
+                  center.style.visibility = "visible"
               }
           </script>
       </div>

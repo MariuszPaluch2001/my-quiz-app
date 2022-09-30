@@ -1,9 +1,9 @@
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 
-from .models import Category, Card, UserAttempt, UserCategory, AuthUser
+from .models import CardAnswer, Category, Card, UserAttempt, UserCategory, AuthUser
 from .forms import CategoryForm, CardForm
 
 import random
@@ -100,8 +100,31 @@ def create_user_attempt(user_category, category_id):
     user_attempt.save(force_insert=True)
     return user_attempt
 
+def add_card_answers(post):
+    attempt = UserAttempt.objects.get(
+        user_attempt_id=int(post["attempt_id"]))
+        
+    all_answers = len(list(post.items())) - 2
+    know_answers = 0
+    for key, value in post.items():
+        if key not in ("csrfmiddlewaretoken", "attempt_id"):
+            if value == 'Y':
+                know_answers += 1
+            card = Card.objects.get(card_id=int(key))
+            card_answer = CardAnswer(
+                card=card, user_attempt_id=attempt, is_correct=value)
+            card_answer.save(force_insert=True)
+
+    return all_answers, know_answers
 
 def render_display_question(request):
+    if request.method == "POST":
+        res = add_card_answers(request.POST)
+        request.session['all_answers'] = res[0]
+        request.session['know_answers'] = res[1]
+        request.session['outcome'] = res[1] / res[0] * 100
+        return redirect('quiz_result')
+
     if request.user.is_authenticated:
         category_id = request.GET["category_id"]
         cards_numb = int(request.GET["cards_numb"])
@@ -110,16 +133,18 @@ def render_display_question(request):
         cards = shuffle_cards(cards, cards_numb)
         category = Category.objects.get(category_id=category_id)
         user_category = get_user_category(request.user.id, category)
-        user_attempt = create_user_attempt(user_category, category_id)        
+        user_attempt = create_user_attempt(user_category, category_id)
         return render(request, "display_question.html", {
             'cards': cards,
             'category': category,
-            'is_auth' : True
+            'is_auth' : True,
+            'user_attempt' : user_attempt
         })
     else:
         return render(request, "display_question.html", {
             'is_auth' : False
         })
+
 def get_most_popular_cat():
     popular_cat_ids = UserCategory.objects.values('category_id').annotate(c=Count('category_id')).order_by("-c")
     popular_cat_ids = list(popular_cat_ids)
@@ -151,3 +176,6 @@ def render_search_categories(request):
         return render(request, "search_categories.html", {
 
         })
+
+def render_quiz_result(request):
+    return render(request, "quiz_result.html", {})

@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Category, Card
+from django.forms import modelformset_factory
+from .models import CardAnswer, Category, Card
 
 class CategoryForm(ModelForm):
     
@@ -51,3 +52,15 @@ class CardForm(ModelForm):
             self.fields['category'].queryset = Category.objects.filter(creator=user)
         if category_initial:    
             self.initial['category'] = Category.objects.get(category_id = category_initial)
+
+
+# class CardAnswerForm(ModelForm):
+#     CHOICES = [ ('Y','Yes'), ('N', 'No')]
+#     response = forms.ChoiceField(widget=forms.RadioSelect,choices=CHOICES)
+
+#     def __init__(self, card : Card, *args, **kwargs):
+#         super(ModelForm, self).__init__(*args,**kwargs)
+        
+
+#     class Meta:
+#         model = CardAnswer

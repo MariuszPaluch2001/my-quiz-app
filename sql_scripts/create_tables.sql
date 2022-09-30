@@ -15,8 +15,7 @@ ALTER TABLE card ADD CONSTRAINT card_pk PRIMARY KEY ( card_id );
 
 CREATE TABLE card_answer (
     card_answer_id            INT NOT NULL,
-    attempt_id                INT NOT NULL,
-    solution_timestamp        TIMESTAMP NOT NULL,
+    user_attempt           INT NOT NULL,
     card_id                   NUMERIC(6) NOT NULL,
     is_correct                CHAR(1) NOT NULL
 );
@@ -65,14 +64,14 @@ CREATE INDEX card__idx ON
 ALTER TABLE multimedia_attach ADD CONSTRAINT mult_attach_pk PRIMARY KEY ( attach_id );
 
 CREATE TABLE user_attempt (
-    attempt_id       INT NOT NULL,
+    user_attempt_id       INT NOT NULL,
     return_time      TIMESTAMP NOT NULL,
     user_id          INT NOT NULL,
     user_category_id NUMERIC(5) NOT NULL
 );
 
 ALTER TABLE user_attempt
-    ADD CONSTRAINT user_attempt_pk PRIMARY KEY (attempt_id);
+    ADD CONSTRAINT user_attempt_pk PRIMARY KEY (user_attempt_id);
 
 CREATE TABLE user_category (
     category_id NUMERIC(5) NOT NULL,
@@ -92,8 +91,8 @@ ALTER TABLE card_answer
         REFERENCES card ( card_id );
 
 ALTER TABLE card_answer
-    ADD CONSTRAINT card_answer_user_attempt_fk FOREIGN KEY (attempt_id)
-        REFERENCES user_attempt (attempt_id);
+    ADD CONSTRAINT card_answer_user_attempt_fk FOREIGN KEY (user_attempt)
+        REFERENCES user_attempt (user_attempt_id);
 
 ALTER TABLE card
     ADD CONSTRAINT card_category_fk FOREIGN KEY ( category_id )

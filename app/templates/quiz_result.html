@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+    <br>
+    <center>
+        <p>Your result: {{ request.session.know_answers  }}</p>
+        <p>All answers: {{ request.session.all_answers }}</p>
+        <p>Outcome: {{ request.session.outcome }}%</p>
+        <button type="button" class="btn btn-primary"><a href="{% url 'home'%}">Home</a></button>
+    </center>
+
+  {% endblock %}
